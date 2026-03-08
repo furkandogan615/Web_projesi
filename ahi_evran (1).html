@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahi Evran — Ahilik Teşkilatının Kurucusu</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --deep-maroon: #3d0c02;
+  --rich-crimson: #8b1a1a;
+  --warm-gold: #c9922a;
+  --pale-gold: #e8c97a;
+  --ivory: #f5ead8;
+  --parchment: #ede0c4;
+  --dark-teal: #1a3a3a;
+  --teal: #2e6b5e;
+  --light-teal: #4a9e8a;
+  --sidebar-width: 280px;
+  --shadow-heavy: 0 8px 32px rgba(61,12,2,0.35);
+  --shadow-soft: 0 2px 12px rgba(61,12,2,0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  background-color: var(--ivory);
+  color: var(--deep-maroon);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── GEOMETRIC PATTERN BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(201,146,42,0.04) 0px, rgba(201,146,42,0.04) 1px, transparent 1px, transparent 30px),
+    repeating-linear-gradient(-45deg, rgba(201,146,42,0.04) 0px, rgba(201,146,42,0.04) 1px, transparent 1px, transparent 30px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ════════════════════════════════
+   SIDEBAR
+════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--deep-maroon) 0%, #5a1408 60%, var(--dark-teal) 100%);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+/* Geometric border on sidebar */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 6px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--warm-gold) 0px, var(--warm-gold) 20px,
+    var(--pale-gold) 20px, var(--pale-gold) 40px,
+    var(--rich-crimson) 40px, var(--rich-crimson) 60px
+  );
+}
+
+.sidebar-logo {
+  padding: 36px 24px 28px;
+  text-align: center;
+  border-bottom: 2px solid rgba(201,146,42,0.3);
+  position: relative;
+}
+
+.sidebar-logo .star {
+  font-size: 2.5rem;
+  color: var(--warm-gold);
+  display: block;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 12px rgba(201,146,42,0.6));
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 8px rgba(201,146,42,0.4)); }
+  to   { filter: drop-shadow(0 0 20px rgba(201,146,42,0.9)); }
+}
+
+.sidebar-logo h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.75rem;
+  color: var(--pale-gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+  flex: 1;
+  padding: 20px 0;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  border-bottom: 1px solid rgba(201,146,42,0.1);
+}
+
+nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 28px;
+  color: var(--parchment);
+  text-decoration: none;
+  font-family: 'Lora', serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+nav ul li a::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 0; height: 100%;
+  background: linear-gradient(90deg, rgba(201,146,42,0.25), transparent);
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::before,
+nav ul li a.active::before {
+  width: 100%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--pale-gold);
+  padding-left: 36px;
+}
+
+nav ul li a .nav-icon {
+  font-size: 1.1rem;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+nav ul li a.active {
+  font-weight: 600;
+  border-left: 3px solid var(--warm-gold);
+}
+
+.sidebar-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(201,146,42,0.2);
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(232,201,122,0.5);
+  letter-spacing: 1px;
+}
+
+/* ════════════════════════════════
+   MAIN CONTENT
+════════════════════════════════ */
+.main-wrapper {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--deep-maroon) 0%, var(--rich-crimson) 40%, #6b2020 70%, var(--dark-teal) 100%);
+  padding: 80px 60px 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(201,146,42,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(46,107,94,0.2) 0%, transparent 40%);
+}
+
+/* Decorative medallion */
+.hero-medallion {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 200px;
+  opacity: 0.12;
+}
+
+.hero-medallion svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 680px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(201,146,42,0.2);
+  border: 1px solid rgba(201,146,42,0.5);
+  color: var(--pale-gold);
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  margin-bottom: 24px;
+  font-family: 'Cinzel Decorative', serif;
+}
+
+.hero h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  color: var(--ivory);
+  line-height: 1.15;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.hero h1 span {
+  color: var(--warm-gold);
+  display: block;
+}
+
+.hero-dates {
+  color: var(--pale-gold);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+.hero-desc {
+  color: rgba(245,234,216,0.85);
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+.hero-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--warm-gold), var(--light-teal));
+  margin: 28px 0;
+}
+
+/* ── SECTIONS ── */
+.content-area {
+  padding: 0 60px 60px;
+}
+
+section {
+  padding: 60px 0;
+  border-bottom: 1px solid rgba(201,146,42,0.2);
+  display: none;
+}
+
+section.active {
+  display: block;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.section-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--rich-crimson), var(--deep-maroon));
+  border: 2px solid var(--warm-gold);
+  border-radius: 0;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-soft);
+}
+
+.section-icon span {
+  transform: rotate(-45deg);
+  font-size: 1.3rem;
+}
+
+.section-header h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.6rem;
+  color: var(--rich-crimson);
+  letter-spacing: 1px;
+}
+
+.section-header p {
+  font-size: 0.8rem;
+  color: var(--teal);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── INFO CARDS ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.info-card {
+  background: white;
+  border: 1px solid rgba(201,146,42,0.25);
+  border-top: 4px solid var(--warm-gold);
+  padding: 28px;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, transparent 50%, rgba(201,146,42,0.08) 50%);
+}
+
+.info-card .card-icon {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.info-card h3 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.9rem;
+  color: var(--rich-crimson);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: #4a3020;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--warm-gold), var(--teal));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 36px;
+  animation: fadeIn 0.5s ease both;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -38px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  background: var(--warm-gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 3px var(--ivory), 0 0 0 5px var(--warm-gold);
+}
+
+.timeline-year {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.8rem;
+  color: var(--teal);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.timeline-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rich-crimson);
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  font-size: 0.87rem;
+  line-height: 1.75;
+  color: #4a3020;
+}
+
+/* ── QUOTE BLOCK ── */
+.quote-block {
+  background: linear-gradient(135deg, var(--deep-maroon) 0%, #5a1408 100%);
+  border-left: 6px solid var(--warm-gold);
+  padding: 36px 44px;
+  margin: 36px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-block::after {
+  content: '❝';
+  position: absolute;
+  right: 30px; bottom: -20px;
+  font-size: 8rem;
+  color: rgba(201,146,42,0.1);
+  font-family: serif;
+  line-height: 1;
+}
+
+.quote-block p {
+  color: var(--ivory);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  font-style: italic;
+}
+
+/* ── WORKS GRID ── */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.work-item {
+  background: linear-gradient(135deg, var(--parchment), var(--ivory));
+  border: 1px solid rgba(201,146,42,0.3);
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.work-item::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(201,146,42,0.15);
+  pointer-events: none;
+}
+
+.work-item:hover {
+  background: linear-gradient(135deg, #f5e4c0, var(--parchment));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.work-item .work-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.work-item h3 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.78rem;
+  color: var(--rich-crimson);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.work-item p {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #5a3a20;
+}
+
+/* ── PRINCIPLES GRID ── */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.principle-item {
+  background: linear-gradient(160deg, var(--teal), var(--dark-teal));
+  padding: 28px 20px;
+  text-align: center;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.principle-item:hover {
+  transform: scale(1.05);
+}
+
+.principle-item .p-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.principle-item h3 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.65rem;
+  color: var(--pale-gold);
+  letter-spacing: 1px;
+}
+
+/* Prose text */
+.prose {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: #3d2010;
+  max-width: 780px;
+}
+
+.prose + .prose {
+  margin-top: 18px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  :root { --sidebar-width: 64px; }
+  .sidebar-logo h2,
+  nav ul li a span.nav-text,
+  .sidebar-footer { display: none; }
+  nav ul li a { padding: 16px; justify-content: center; }
+  nav ul li a .nav-icon { font-size: 1.3rem; }
+  .hero { padding: 50px 30px; }
+  .content-area { padding: 0 30px 40px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     SIDEBAR
+══════════════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span class="star">✦</span>
+    <h2>Ahi Evran<br/>Veli</h2>
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="#" class="active" onclick="showSection('hakkinda', this)">
+          <span class="nav-icon">🌙</span>
+          <span class="nav-text">Hakkında</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showSection('hayati', this)">
+          <span class="nav-icon">📜</span>
+          <span class="nav-text">Hayatı</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showSection('ahilik', this)">
+          <span class="nav-icon">⚒️</span>
+          <span class="nav-text">Ahilik Teşkilatı</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showSection('ilkeler', this)">
+          <span class="nav-icon">⭐</span>
+          <span class="nav-text">Ahiliğin İlkeleri</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showSection('eserler', this)">
+          <span class="nav-icon">📖</span>
+          <span class="nav-text">Eserleri</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showSection('mirac', this)">
+          <span class="nav-icon">🕌</span>
+          <span class="nav-text">Manevi Mirası</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    1171 — 1261
+  </div>
+</aside>
+
+<!-- ══════════════════════════════
+     MAIN
+══════════════════════════════ -->
+<main class="main-wrapper">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-medallion">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="100,10 122,45 160,35 145,72 175,95 145,118 160,155 122,145 100,180 78,145 40,155 55,118 25,95 55,72 40,35 78,45" stroke="white" stroke-width="2" fill="none"/>
+        <circle cx="100" cy="100" r="40" stroke="white" stroke-width="2" fill="none"/>
+        <polygon points="100,30 115,85 170,100 115,115 100,170 85,115 30,100 85,85" stroke="white" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge">✦ Türk-İslam Medeniyeti ✦</span>
+      <h1>Ahi Evran<span>Veli</span></h1>
+      <p class="hero-dates">◈ 1171 · Hoy, Azerbaycan &nbsp;—&nbsp; 1261 · Kırşehir ◈</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">
+        Anadolu Ahiliğinin kurucusu, 32 esnaf zümresinin piri, büyük mutasavvıf ve
+        düşünür. Kurduğu teşkilatla Anadolu'nun imar ve iktisadi kalkınmasına öncülük
+        etmiş, Osmanlı Devleti'nin kuruluşunda belirleyici bir rol üstlenmiştir.
+      </p>
+    </div>
+  </header>
+
+  <div class="content-area">
+
+    <!-- ── HAKKINDA ── -->
+    <section id="hakkinda" class="active">
+      <div class="section-header">
+        <div class="section-icon"><span>🌙</span></div>
+        <div>
+          <h2>Ahi Evran Kimdir?</h2>
+          <p>Genel Bilgi</p>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-icon">🌍</span>
+          <h3>Doğum & Ölüm</h3>
+          <p>1171 yılında İran'ın Batı Azerbaycan bölgesindeki Hoy kasabasında dünyaya geldi. 1261 yılında Kırşehir'de hayatını kaybetti. 90 yılı aşkın bir ömür sürdü.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">📛</span>
+          <h3>Asıl Adı</h3>
+          <p>Gerçek adı <strong>Nasirüddin Mahmud el-Hoyi</strong>'dir. "Evran" lakabı Türkçe'de yılan/ejderha anlamına gelir. Rivayete göre büyük bir yılan ona itaat ettiği için bu adı almıştır.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🎓</span>
+          <h3>İlim & İrfan</h3>
+          <p>Fahrettin Razi'den fen ve din bilimlerini öğrendi. Tefsir, hadis, fıkıh, kelam, tıp, felsefe ve kimya alanlarında derin bilgi edindi.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">⚒️</span>
+          <h3>Mesleği</h3>
+          <p>Asıl mesleği <em>debbağlık</em> (deri tabakçılığı) idi. Kayseri'de bir deri atölyesi kurarak esnaf teşkilatının ilk nüvesini oluşturdu.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">👥</span>
+          <h3>Çağdaşları</h3>
+          <p>Hacı Bektaş Veli, Mevlana Celaleddin-i Rumi ve Yunus Emre ile aynı dönemde yaşadı. Bu üç büyük isimle hem fikri hem siyasi ilişkisi oldu.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🏛️</span>
+          <h3>Bugünkü Mirası</h3>
+          <p>Kırşehir'deki türbesi hâlâ ziyaretçi kabul etmektedir. Ahilik Haftası her yıl Eylül ayında Kırşehir'de kutlanmakta, adını taşıyan üniversite ve okullar bulunmaktadır.</p>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <p>
+          "Onları hiç ölmeyecekmiş gibi bu dünya için, yarın ölecekmiş gibi ahiret için
+          çalışan insanlar halinde yetiştirmiştir. Böylece Anadolu'nun iktisadi kalkınmasına
+          ve imarına öncülük etmiştir."
+        </p>
+      </div>
+    </section>
+
+    <!-- ── HAYATI ── -->
+    <section id="hayati">
+      <div class="section-header">
+        <div class="section-icon"><span>📜</span></div>
+        <div>
+          <h2>Hayatı</h2>
+          <p>Kronolojik Yaşam Öyküsü</p>
+        </div>
+      </div>
+
+      <p class="prose">
+        Ahi Evran'ın hayatı, 13. yüzyılın siyasi kargaşası ve Moğol istilasının Anadolu'yu kasıp kavurduğu
+        bir dönemde geçmiştir. Buna rağmen o, ilim, meslek ve tasavvuf alanındaki faaliyetlerini hiç
+        durdurmamış; gittiği her şehirde yeni bir yapılanmanın çekirdeğini oluşturmuştur.
+      </p>
+
+      <br>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1171</div>
+          <h3>Hoy'da Doğuş</h3>
+          <p>İran'ın Batı Azerbaycan bölgesindeki Hoy kasabasında dünyaya geldi. Çocukluğu ve ilk tahsil yılları Azerbaycan'da geçti.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">~1190–1200</div>
+          <h3>Horasan ve Maveraünnehir Yolculuğu</h3>
+          <p>Gençliğinde Horasan'a giderek ünlü alim Fahrettin Razi'den felsefe, tıp ve din ilimleri öğrendi. İbn-i Sina ve Farabi'nin eserlerinden ilham aldı.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">~1204</div>
+          <h3>Bağdat ve Fütüvvet Teşkilatı</h3>
+          <p>Hac dönüşünde şeyhi Evhadüddin Kirmani ile tanıştı. Abbasi Halifesi Nasır Lidinillah'ın kurduğu Fütüvvet Teşkilatı'na katıldı. Kirmani'nin kızı Fatma Bacı ile evlendi.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">~1205</div>
+          <h3>Anadolu'ya Gelişi</h3>
+          <p>Muhyiddin İbn Arabi ve hocası Kirmani ile birlikte Selçuklu Sultanı I. Gıyaseddin Keyhüsrev'in daveti üzerine Anadolu'ya geçti. Konya'ya yerleşti.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">~1207</div>
+          <h3>Kayseri'de İlk Teşkilat</h3>
+          <p>Kayseri'ye yerleşerek bir deri atölyesi kurdu ve ilk Ahi teşkilatını burada oluşturdu. Sultan I. Gıyaseddin'in desteğiyle teşkilat hızla büyüdü.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1227–1237</div>
+          <h3>Konya'da Altın Çağ</h3>
+          <p>Sultan I. Alaeddin Keykubad'ın himayesinde Konya'da hem sanatını icra etti hem de müderrislik yaptı. Ahilik teşkilatı Anadolu'ya yayıldı.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1237–1245</div>
+          <h3>Hapis ve Sürgün</h3>
+          <p>Sultana suikast düzenleyenlere karşı çıktığı için II. Gıyaseddin Keyhüsrev tarafından Konya'da tutuklandı. Sekiz yıl boyunca hapis yattı.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1247–1261</div>
+          <h3>Kırşehir'de Son Yıllar</h3>
+          <p>Serbest bırakıldıktan sonra Denizli'ye, ardından Kırşehir'e yerleşti. Ömrünün son 15 yılını burada geçirdi. 1261'de hayatını kaybetti.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AHİLİK ── -->
+    <section id="ahilik">
+      <div class="section-header">
+        <div class="section-icon"><span>⚒️</span></div>
+        <div>
+          <h2>Ahilik Teşkilatı</h2>
+          <p>Meslek, Ahlak ve Dayanışma</p>
+        </div>
+      </div>
+
+      <p class="prose">
+        Ahilik, Ahi Evran tarafından kurulan ve Selçuklu ile Osmanlı coğrafyasında asırlar boyunca
+        hayat bulan bir esnaf ve zanaat dayanışma teşkilatıdır. Yalnızca ekonomik bir örgütlenme
+        olmayıp; ahlaki, dini ve sosyal boyutları olan kapsamlı bir hayat felsefesini temsil eder.
+      </p>
+      <p class="prose">
+        Ahi Evran, Fütüvvet Teşkilatı'ndan ilham alarak Anadolu koşullarına özgü bir model geliştirdi.
+        32 farklı esnaf zümresini tek çatı altında topladı. Kırşehir bu teşkilatın merkezi oldu ve
+        buradan "İcazzetname" almayan hiçbir esnaf mesleğini icra edemezdi.
+      </p>
+
+      <br>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-icon">🧑‍徒</span>
+          <h3>Eğitim Kademeleri</h3>
+          <p><strong>Yamaklık</strong> → <strong>Çıraklık</strong> (3 yıl) → <strong>Kalfalık</strong> (6 ay) → <strong>Ustalık</strong>. Her kademe özel törenlerle geçilir, peştamal/şed kuşatma en önemli gelenekti.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🤝</span>
+          <h3>Dayanışma Ruhu</h3>
+          <p>Teşkilat üyeleri birbirinin yükünü taşır, fakiri doyurur, yolcuya kapı açardı. Zaviyeler hem iş hem de misafirhane işlevi görürdü.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">⚖️</span>
+          <h3>Kalite Güvencesi</h3>
+          <p>Üretilen malların kalitesi sıkı denetim altındaydı. Hile yapan, müşteriyi aldatan esnaf teşkilattan ihraç edilirdi. Bu sayede Selçuklu malları dünya ticaretinde saygınlık kazandı.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🕌</span>
+          <h3>Manevi Boyut</h3>
+          <p>Ahilik salt meslek eğitimi değildi; tasavvuf anlayışıyla iç içeydi. Ahiler hem usta hem de gönül eri olmak zorundaydı. Namaz, oruç ve dürüstlük temel şarttı.</p>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <p>
+          "Ahi Evran, 32 çeşit esnafı teşkilatlandırmış; Selçuklu ve Osmanlı coğrafyasında sanatını
+          icra eden bütün esnaflar İslam medeniyetinin zirve kuruluşu Ahilik Teşkilatının merkezi
+          Kırşehir'den İcazetname almışlardır."
+        </p>
+      </div>
+    </section>
+
+    <!-- ── İLKELER ── -->
+    <section id="ilkeler">
+      <div class="section-header">
+        <div class="section-icon"><span>⭐</span></div>
+        <div>
+          <h2>Ahiliğin İlkeleri</h2>
+          <p>Fazilet ve Ahlak Anlayışı</p>
+        </div>
+      </div>
+
+      <p class="prose" style="margin-bottom: 36px;">
+        Ahilik yalnızca bir meslek örgütlenmesi değil, insanı her yönüyle şekillendirmeyi hedefleyen
+        bir yaşam felsefesidir. Bu felsefenin temelinde kardeşlik, dürüstlük, cömertlik ve üretim sevinci yatar.
+      </p>
+
+      <div class="principles-grid">
+        <div class="principle-item">
+          <span class="p-icon">🤝</span>
+          <h3>Kardeşlik</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">💎</span>
+          <h3>Dürüstlük</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">🎁</span>
+          <h3>Cömertlik</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">⚒️</span>
+          <h3>Üretim</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">🦁</span>
+          <h3>Yiğitlik</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">📚</span>
+          <h3>İlim</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">🌙</span>
+          <h3>Takva</h3>
+        </div>
+        <div class="principle-item">
+          <span class="p-icon">🌱</span>
+          <h3>Fedakarlık</h3>
+        </div>
+      </div>
+
+      <br><br>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-icon">🚪</span>
+          <h3>Açık Kapı Geleneği</h3>
+          <p>Ahi zaviyelerinde kapılar her zaman açıktı. Yoldan geçen herkes — yabancı ya da fakir — misafir edilir, doyurulur ve barındırılırdı.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🙅</span>
+          <h3>Yasak Davranışlar</h3>
+          <p>Bir Ahi; iftira atmaz, haksız rekabet yapmaz, çalışmaktan kaçınmaz, hile yapmaz, yoksulu ezmez. Bu kurallara uymayan teşkilattan ihraç edilirdi.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🌺</span>
+          <h3>Kadın Kolu: Bacıyan-ı Rum</h3>
+          <p>Ahi Evran'ın eşi Fatma Bacı tarafından kurulan kadın teşkilatı, kadınların toplumsal hayata aktif katılımını sağlayan öncü bir yapıydı.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ESERLER ── -->
+    <section id="eserler">
+      <div class="section-header">
+        <div class="section-icon"><span>📖</span></div>
+        <div>
+          <h2>Eserleri</h2>
+          <p>İlmi Miras</p>
+        </div>
+      </div>
+
+      <p class="prose" style="margin-bottom: 36px;">
+        Ahi Evran, sadece pratik bir örgütleyici değil aynı zamanda üretken bir ilim adamıydı.
+        Tasavvuf, felsefe, tıp ve ahlak üzerine kaleme aldığı eserler, döneminin entelektüel
+        birikimini yansıtmaktadır.
+      </p>
+
+      <div class="works-grid">
+        <div class="work-item">
+          <span class="work-icon">📜</span>
+          <h3>Metālib ül-İlāhiyye</h3>
+          <p>Tasavvuf ve ilahi hakikatler üzerine kaleme aldığı felsefi-tasavvufi eseri.</p>
+        </div>
+        <div class="work-item">
+          <span class="work-icon">🔬</span>
+          <h3>Letāifü'l-Hikme</h3>
+          <p>Felsefe ve bilgelik konularını işleyen; İbn-i Sina geleneğini sürdüren ilmi çalışması.</p>
+        </div>
+        <div class="work-item">
+          <span class="work-icon">🌿</span>
+          <h3>Tabsıratü'l-Mübtedi</h3>
+          <p>Başlangıç düzeyindeki talebelere yönelik yazılmış bir tasavvuf rehberi.</p>
+        </div>
+        <div class="work-item">
+          <span class="work-icon">⚕️</span>
+          <h3>Tıp Risaleleri</h3>
+          <p>Hocası Fahrettin Razi'nin etkisiyle tıp alanında da eserler verdi. İlaçlar ve tedavi yöntemleri üzerine çalışmalar kaleme aldı.</p>
+        </div>
+        <div class="work-item">
+          <span class="work-icon">🏛️</span>
+          <h3>Fütüvvetnameler</h3>
+          <p>Ahilik teşkilatının kural ve törenlerini belirleyen, ahlaki ilkeleri aktaran temel rehber niteliğindeki metinler.</p>
+        </div>
+        <div class="work-item">
+          <span class="work-icon">📿</span>
+          <h3>Tasavvuf Risaleleri</h3>
+          <p>Manevi olgunlaşma yolunu, nefis terbiyesini ve Allah'a yakınlaşmanın usullerini anlatan eserleri.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MANEVİ MİRAS ── -->
+    <section id="mirac">
+      <div class="section-header">
+        <div class="section-icon"><span>🕌</span></div>
+        <div>
+          <h2>Manevi Mirası</h2>
+          <p>Tarih Boyunca Etkisi</p>
+        </div>
+      </div>
+
+      <p class="prose">
+        Ahi Evran'ın kurduğu teşkilat ve yaydığı düşünce sistemi, onun ölümünden sonra da
+        asırlarca canlılığını korudu. Osmanlı Devleti'nin yükselmesinde Ahiliğin payı son
+        derece büyüktür: Osmanlı'yı kuran Osman Gazi'nin kayınpederi Şeyh Edebali'nin de
+        Ahi geleneğinden geldiği bilinmektedir.
+      </p>
+      <p class="prose">
+        Kırşehir'deki Ahi Evran Zaviyesi, Osmanlı döneminde tüm Türk debbağlarının ve zanaat
+        erbabının manevi merkezi olarak kabul görmüştür. XX. yüzyılın başlarına kadar esnaf
+        zümresi üzerindeki manevi etkisini sürdürmüştür.
+      </p>
+
+      <br>
+
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="card-icon">🏰</span>
+          <h3>Osmanlı'ya Etkisi</h3>
+          <p>Ahilik, Osmanlı Devleti'nin sosyal ve ekonomik altyapısını oluşturdu. Esnaf loncaları Ahilik teşkilatının devamıydı. Osmanlı padişahları Ahi Evran'ın mirasına saygı gösterdi.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🗺️</span>
+          <h3>Anadolu'nun Vatanlaşması</h3>
+          <p>Moğol istilasından kaçan Türkmen göçmenler, Ahi tekkeleri sayesinde hem iş hem aş buldu. Ahilik bu göçmenleri Anadolu'ya kök saldırdı.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🎓</span>
+          <h3>Eğitim Modeli</h3>
+          <p>Ahiliğin çıraklık sistemi, Türkiye'deki mesleki eğitim sisteminin tarihsel prototipi sayılmaktadır. Bugün hâlâ anılmakta ve ilham kaynağı olmaktadır.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">📅</span>
+          <h3>Ahilik Haftası</h3>
+          <p>Her yıl Eylül ayının ikinci haftasında Kırşehir'de "Ahilik Kültürü Haftası" kutlanmaktadır. Bu hafta tüm Türkiye'de esnaf ve sanatkarlar Ahi Evran'ı anmaktadır.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🕌</span>
+          <h3>Türbe ve Külliye</h3>
+          <p>Kırşehir'deki Ahi Evran Türbesi ve Külliyesi günümüzde de ziyaretçi kabul etmektedir. Türbe, Anadolu Ahiliğinin manevi ocağı olarak bilinmektedir.</p>
+        </div>
+        <div class="info-card">
+          <span class="card-icon">🏫</span>
+          <h3>Kırşehir Üniversitesi</h3>
+          <p>Kırşehir Ahi Evran Üniversitesi, büyük piirin adını taşıyan ve onun mirasını gelecek kuşaklara taşımayı hedefleyen bir yükseköğretim kurumudur.</p>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <p>
+          "Kardeşliğin, cömertliğin, yiğitliğin, fedakârlığın, doğruluğun, dürüstlüğün,
+          kalitenin, üretimin, ahlâkın, sanatın, aklın ve bilimin esas alındığı Ahilik
+          Teşkilatının kurucusu bu faziletli âlim ve mutasavvıf, Horasanlı Türkün onurudur."
+        </p>
+      </div>
+    </section>
+
+  </div><!-- /content-area -->
+</main>
+
+<script>
+  function showSection(id, linkEl) {
+    // Hide all sections
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    // Show target
+    document.getElementById(id).classList.add('active');
+    // Update nav active state
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    linkEl.classList.add('active');
+    // Prevent default
+    event.preventDefault();
+  }
+</script>
+
+</body>
+</html>
