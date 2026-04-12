@@ -1,50 +1,39 @@
-/* Mevcut CSS'inize aşağıdaki düzenlemeleri ekleyin veya ilgili kısımları güncelleyin */
+// ── HAMBURGER MENÜ YÖNETİMİ ────────────────────────────────
+const hamburger = document.querySelector('.hamburger');
+const mobileNav = document.querySelector('.mobile-nav');
+const body = document.body;
 
-/* Menü geçişleri için yumuşatma */
-.mobile-nav {
-  display: flex; /* Display none yerine flex + visibility kullanmak animasyon için daha iyidir */
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  z-index: 199;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(1.1);
-  transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  pointer-events: none;
+if (hamburger && mobileNav) {
+  const toggleMenu = () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+    body.style.overflow = isOpen ? 'hidden' : '';
+  };
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  // Linklere tıklandığında menüyü kapat ve ilgili bölüme git
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      body.style.overflow = '';
+    });
+  });
 }
 
-.mobile-nav.open {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  pointer-events: all;
+// ── TEMA YÖNETİMİ ──────────────────────────────────────────
+const themeBtn = document.querySelector('.theme-toggle');
+const currentTheme = localStorage.getItem('theme') || 'light';
+
+document.documentElement.setAttribute('data-theme', currentTheme);
+
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
 }
 
-/* Miras ve İletişim Grid Düzeltmeleri */
-.miras-container, .ziyaret-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-}
-
-@media (max-width: 900px) {
-    .miras-container, .ziyaret-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .header-right nav.desktop-nav {
-        display: none;
-    }
-}
-
-/* Hamburger Aktif Rengi */
-.hamburger.active span {
-    background: var(--accent) !important;
-}
+// Reveal Scroll (Mevcut kodunuzu koruyabilirsiniz, gayet iyi çalışıyor)
